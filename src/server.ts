@@ -2,9 +2,14 @@ import express from 'express'; // Importing the express module
 import cors from 'cors';
 import dotenv from 'dotenv';
 import investimentoController from './controllers/investimento.controller.js';
+import swaggerUi from 'swagger-ui-express';
+import { swaggerDocument } from './swagger.js';
 const app = express(); // Creating an express app
 
+
 dotenv.config();
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 
