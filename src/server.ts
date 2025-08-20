@@ -11,10 +11,15 @@ const port = process.env.PORT ? parseInt(process.env.PORT, 10) : 3001;
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cors());
 
-app.post('/investments', investimentoController.criar);
-app.get('/investments', investimentoController.listar);
-app.put('/investments/:id', investimentoController.atualizar);
-app.delete('/investments/:id', investimentoController.excluir);
+app.post('/investment', investimentoController.criar);
+app.get('/investment', investimentoController.listar);
+app.put('/investment/:id', investimentoController.atualizar);
+app.delete('/investment/:id', investimentoController.excluir);
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

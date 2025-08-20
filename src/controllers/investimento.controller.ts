@@ -15,7 +15,7 @@ class InvestimentoController {
     async listar(req: Request, res: Response) {
         try {
             const investimentos = await InvestimentoService.listar();
-            res.json(investimentos);
+            res.status(200).json(investimentos);
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             res.status(500).json({ error: message });
@@ -26,7 +26,7 @@ class InvestimentoController {
         try {
             const id = req.params.id;
             const investimentoAtualizado = await InvestimentoService.atualizar(Number(id), req.body);
-            res.json(investimentoAtualizado);
+            res.status(200).json(investimentoAtualizado);
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
             res.status(400).json({ error: message });
