@@ -10,8 +10,8 @@ type RequestInfo = Omit<Investimento, 'id'> & {
 class InvestimentoService {
     async criar(data: RequestInfo) {
         var dateparts = data.data.split('-');
-        var mydate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
-        const investimentoData: InvestimentoData = { ...data, data: mydate };
+        var finaldate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
+        const investimentoData: InvestimentoData = { ...data, data: finaldate };
         return InvestimentoRepository.criar(investimentoData);
     }
 
@@ -22,8 +22,8 @@ class InvestimentoService {
     async atualizar(id: number, data: Partial<RequestInfo>) {
         if (data.data && typeof data.data === 'string') {
             var dateparts = data.data.split('-');
-            var mydate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
-            const investimentoData: Partial<InvestimentoData> = { ...data, data: mydate };
+            var finaldate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
+            const investimentoData: Partial<InvestimentoData> = { ...data, data: finaldate };
             return InvestimentoRepository.atualizar(id, investimentoData);
         }
         else {
