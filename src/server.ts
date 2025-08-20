@@ -21,10 +21,6 @@ app.get('/investment', investimentoController.listar);
 app.put('/investment/:id', investimentoController.atualizar);
 app.delete('/investment/:id', investimentoController.excluir);
 
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.url}`);
-  next();
-});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
