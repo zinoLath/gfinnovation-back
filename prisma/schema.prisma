@@ -22,4 +22,5 @@ model Investimento {
   nome  String
   valor Decimal
   tipo  TipoInvestimento
+  data  DateTime
 }
