@@ -4,7 +4,9 @@ import InvestimentoService from '../services/investimento.service.js';
 class InvestimentoController {
     async criar(req: Request, res: Response) {
         try {
-            const investimento = await InvestimentoService.criar(req.body);
+            var dateparts = req.body.data.split('-');
+            var finaldate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
+            const investimento = await InvestimentoService.criar({ ...req.body, data: finaldate });
             res.status(201).json(investimento);
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
@@ -25,7 +27,9 @@ class InvestimentoController {
     async atualizar(req: Request, res: Response) {
         try {
             const id = req.params.id;
-            const investimentoAtualizado = await InvestimentoService.atualizar(Number(id), req.body);
+            var dateparts = req.body.data.split('-');
+            var finaldate = new Date(Number(dateparts[0]), Number(dateparts[1]) - 1, Number(dateparts[2]));
+            const investimentoAtualizado = await InvestimentoService.atualizar(Number(id), { ...req.body, data: finaldate });
             res.status(200).json(investimentoAtualizado);
         } catch (error) {
             const message = error instanceof Error ? error.message : String(error);
